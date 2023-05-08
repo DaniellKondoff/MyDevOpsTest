@@ -1,0 +1,26 @@
+services:
+    web:
+        image: 9106237520/bgapp-web
+        deploy:
+            replicas: 5
+        ports:
+             - 8080:80
+        volumes:
+            - "/home/vagrant/<app-folder>/web:/var/www/html:ro"
+        networks:
+            - app-network
+        depends_on: 
+            - db
+    db:
+        image: 9106237520/bgapp-db
+        networks:
+            - app-network
+        environment:
+             MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
+        secrets:
+            - db_root_password
+secrets:
+    db_root_password:
+        external: true
+networks:
+    app-network:
