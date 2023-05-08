@@ -2,11 +2,11 @@ services:
     web:
         image: 9106237520/bgapp-web
         deploy:
-            replicas: 5
+            replicas: 1
         ports:
              - 8080:80
         volumes:
-            - "/home/vagrant/MyDevOpsTest/web:/var/www/html:ro"
+            - "/home/vagrant/MyDevOpsTest/web: /var/www/html:ro"
         networks:
             - app-network
     db:
